@@ -1,0 +1,274 @@
+/* ============================================================
+   RestaurantPro — Thème "Midnight Indigo"
+   Palette:
+     Fond principal   #0b0e1a
+     Panneaux/sidebar #10162a
+     Surfaces/cartes   #141a2e
+     Surfaces alt      #1b2340
+     Bordures          #223760
+     Accent principal  #e94560  (rose corail)
+     Succès            #159267 -> #22c55e
+     Avertissement     #c9820f -> #f5a623
+     Danger            #c0392b -> #e74c3c
+============================================================ */
+
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: linear-gradient(to bottom right, #0b0e1a, #0e1220 60%, #0b0e1a);
+    -fx-text-fill: #c3cadb;
+}
+
+/* ---------- Champs de saisie ---------- */
+.text-field, .password-field, .text-area, .combo-box, .date-picker {
+    -fx-background-color: #141a2e;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #5b6478;
+    -fx-background-radius: 9;
+    -fx-border-color: #223760;
+    -fx-border-radius: 9;
+    -fx-padding: 8 12;
+    -fx-font-size: 13px;
+}
+.text-field:hover, .password-field:hover, .combo-box:hover {
+    -fx-border-color: #2f5d8a;
+}
+.text-field:focused, .password-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: #e94560;
+    -fx-effect: dropshadow(gaussian, rgba(233,69,96,0.35), 10, 0.25, 0, 0);
+}
+
+/* ---------- Boutons ---------- */
+.button {
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-background-radius: 9;
+    -fx-padding: 9 18;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 6, 0, 0, 2);
+}
+.button:pressed { -fx-opacity: 0.85; -fx-translate-y: 1; }
+.button:disabled { -fx-opacity: 0.45; -fx-effect: none; -fx-cursor: default; }
+
+.btn-primary {
+    -fx-background-color: linear-gradient(to bottom, #2f5d8a, #223760);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.btn-primary:hover { -fx-background-color: linear-gradient(to bottom, #3a6ea0, #2a4576); }
+
+.btn-success {
+    -fx-background-color: linear-gradient(to bottom, #22c55e, #159267);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.btn-success:hover { -fx-background-color: linear-gradient(to bottom, #34d68f, #17a877); }
+
+.btn-danger {
+    -fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.btn-danger:hover { -fx-background-color: linear-gradient(to bottom, #ef6353, #d4402e); }
+
+.btn-warning {
+    -fx-background-color: linear-gradient(to bottom, #f5a623, #c9820f);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.btn-warning:hover { -fx-background-color: linear-gradient(to bottom, #ffb648, #dd910f); }
+
+.btn-accent {
+    -fx-background-color: linear-gradient(to bottom, #ff5b78, #e94560);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(233,69,96,0.45), 10, 0.2, 0, 2);
+}
+.btn-accent:hover { -fx-background-color: linear-gradient(to bottom, #ff7690, #f0546e); }
+
+/* ---------- Barre latérale ---------- */
+.sidebar {
+    -fx-background-color: #10162a;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 14, 0, 3, 0);
+}
+.sidebar-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #98a2b8;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 11 16;
+    -fx-background-radius: 9;
+    -fx-font-size: 13px;
+    -fx-effect: none;
+}
+.sidebar-btn:hover {
+    -fx-background-color: #1b2547;
+    -fx-text-fill: white;
+}
+.sidebar-btn-active {
+    -fx-background-color: linear-gradient(to right, #223760, #1b2b4d);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent transparent transparent #e94560;
+    -fx-border-width: 0 0 0 3;
+    -fx-background-radius: 6;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 11 16;
+    -fx-font-size: 13px;
+}
+.sidebar-btn-danger {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e74c3c;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 11 16;
+    -fx-background-radius: 9;
+    -fx-font-size: 13px;
+}
+.sidebar-btn-danger:hover { -fx-background-color: #3a1220; -fx-text-fill: #ff8577; }
+
+/* ---------- Cartes / panneaux ---------- */
+.card {
+    -fx-background-color: #141a2e;
+    -fx-background-radius: 14;
+    -fx-border-color: #223760;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0, 0, 4);
+}
+
+/* ---------- Tables ---------- */
+.table-view, .list-view {
+    -fx-background-color: #141a2e;
+    -fx-border-color: #223760;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 3);
+    -fx-padding: 2;
+}
+.table-view .column-header-background {
+    -fx-background-color: #1a2340;
+    -fx-background-radius: 10 10 0 0;
+}
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #223760 transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #c3cadb;
+    -fx-font-weight: bold;
+    -fx-font-size: 11.5px;
+}
+.table-view .table-cell {
+    -fx-text-fill: #dfe4ef;
+    -fx-border-color: transparent;
+    -fx-padding: 9 12;
+    -fx-font-size: 13px;
+}
+.table-row-cell { -fx-background-color: #141a2e; -fx-table-cell-border-color: transparent; }
+.table-row-cell:odd { -fx-background-color: #171d33; }
+.table-row-cell:hover { -fx-background-color: #1c2444; }
+.table-row-cell:selected { -fx-background-color: linear-gradient(to right, #e94560, #c9394f); }
+.table-row-cell:selected .table-cell { -fx-text-fill: white; }
+.table-view .scroll-bar { -fx-background-color: transparent; }
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #dfe4ef;
+    -fx-padding: 9 12;
+}
+.list-cell:filled:odd { -fx-background-color: #171d33; }
+.list-cell:filled:hover { -fx-background-color: #1c2444; }
+.list-cell:filled:selected { -fx-background-color: linear-gradient(to right, #e94560, #c9394f); -fx-text-fill: white; }
+
+/* ---------- Onglets ---------- */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+.tab-pane .tab {
+    -fx-background-color: #141a2e;
+    -fx-background-radius: 9 9 0 0;
+    -fx-padding: 9 22;
+}
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #98a2b8;
+    -fx-font-size: 13px;
+}
+.tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(to bottom, #e94560, #c9394f);
+}
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.tab-pane .tab-header-area { -fx-padding: 6 0 0 6; }
+
+/* ---------- ComboBox ---------- */
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: #141a2e;
+    -fx-border-color: #223760;
+    -fx-border-radius: 9;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 12, 0, 0, 4);
+}
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #141a2e;
+    -fx-text-fill: #dfe4ef;
+    -fx-padding: 8 12;
+}
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #223760;
+    -fx-text-fill: white;
+}
+
+/* ---------- Divers ---------- */
+.scroll-pane { -fx-background-color: transparent; }
+.scroll-pane > .viewport { -fx-background-color: transparent; }
+
+.scroll-bar { -fx-background-color: transparent; }
+.scroll-bar .thumb {
+    -fx-background-color: #2a3557;
+    -fx-background-radius: 6;
+}
+.scroll-bar .thumb:hover { -fx-background-color: #3a4b7a; }
+.scroll-bar .track { -fx-background-color: transparent; }
+.scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-background-color: transparent; -fx-padding: 0; }
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow { -fx-background-color: transparent; }
+
+.separator .line { -fx-border-color: #232a42; -fx-border-width: 1; }
+.label { -fx-text-fill: #c3cadb; }
+
+.ticket-cuisine {
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-font-size: 14px;
+    -fx-control-inner-background: #10162a;
+    -fx-background-color: #10162a;
+    -fx-background-radius: 12;
+    -fx-border-color: #223760;
+    -fx-border-radius: 12;
+    -fx-text-fill: #dfe4ef;
+}
+.ticket-cuisine .content {
+    -fx-background-color: #10162a;
+    -fx-background-radius: 12;
+}
+
+/* Badges de statut (utilisés via cellFactory) */
+.badge {
+    -fx-padding: 4 12;
+    -fx-background-radius: 20;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+}
+.badge-attente      { -fx-background-color: linear-gradient(to right, #f5a623, #c9820f); }
+.badge-preparation  { -fx-background-color: linear-gradient(to right, #60a5fa, #3b82f6); }
+.badge-prete        { -fx-background-color: linear-gradient(to right, #34d399, #159267); }
+.badge-servie       { -fx-background-color: linear-gradient(to right, #98a2b8, #6b7488); }
+.badge-annulee      { -fx-background-color: linear-gradient(to right, #e74c3c, #c0392b); }
+
+/* Titres de section */
+.section-title {
+    -fx-text-fill: white;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+}

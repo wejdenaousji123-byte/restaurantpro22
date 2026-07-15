@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.restaurantpro.fx.controller.AdminDashboardController"
+            style="-fx-background-color:#0b0e1a;">
+
+    <left>
+        <VBox spacing="5" minWidth="210"
+              styleClass="sidebar" style="-fx-background-color:#141a2e;-fx-padding:20;">
+            <Text text="RestaurantPro"
+                  style="-fx-fill:white;-fx-font-size:18;-fx-font-weight:bold;"/>
+            <Label fx:id="nomAdminLabel"
+                   style="-fx-text-fill:#98a2b8;-fx-font-size:12;-fx-padding:0 0 20 0;"/>
+
+            <Button text="Plan de Salle"  fx:id="btnTables"    onAction="#showTables"    maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="Gestion Menu"   fx:id="btnMenu"      onAction="#showMenu"      maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="Commandes"      fx:id="btnCommandes" onAction="#showCommandes" maxWidth="Infinity" styleClass="sidebar-btn"/>
+
+            <Button text="💵 Additions"   fx:id="btnAdditions"  onAction="#showGestionAdditions" maxWidth="Infinity" styleClass="sidebar-btn"/>
+
+            <Button text="Statistiques"   fx:id="btnStats"     onAction="#showStats"     maxWidth="Infinity" styleClass="sidebar-btn"/>
+
+            <Button text="👤 Utilisateurs" fx:id="btnUtilisateurs" onAction="#showUtilisateurs" maxWidth="Infinity" styleClass="sidebar-btn"/>
+
+            <HBox alignment="CENTER_LEFT">
+                <Button text="🔔 Notifications" fx:id="btnNotifications" onAction="#showNotifications" maxWidth="Infinity" styleClass="sidebar-btn" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="badgeNotifCount" text="" visible="false" managed="false"
+                       style="-fx-background-color:#e74c3c;-fx-text-fill:white;-fx-font-size:10;-fx-font-weight:bold;-fx-background-radius:10;-fx-padding:2 7;-fx-translate-x:-10;"/>
+            </HBox>
+
+            <Separator style="-fx-background-color:#232a42;"/>
+            <Button text="Deconnexion" onAction="#logout" maxWidth="Infinity" styleClass="sidebar-btn-danger"/>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="mainStack" style="-fx-background-color:#0b0e1a;">
+
+            <VBox fx:id="paneTables" style="-fx-background-color:#0b0e1a;-fx-padding:25;" spacing="15">
+                <Text text="Plan de Salle" style="-fx-fill:white;-fx-font-size:20;-fx-font-weight:bold;"/>
+
+                <HBox spacing="10" alignment="CENTER_LEFT"
+                      style="-fx-background-color:#141a2e;-fx-background-radius:10;-fx-padding:12;">
+                    <TextField fx:id="tNumeroField"     promptText="N° table"     prefWidth="75"/>
+                    <TextField fx:id="tCapaciteField"   promptText="Capacité"     prefWidth="75"/>
+                    <TextField fx:id="tEmplacementField" promptText="Emplacement (ex: Terrasse)" prefWidth="180"/>
+                    <Button text="✚ Ajouter table"    onAction="#ajouterTable"    styleClass="btn-success"/>
+                    <Button text="✎ Modifier table"   onAction="#modifierTable"   styleClass="btn-warning"/>
+                    <Button text="✖ Supprimer table"  onAction="#supprimerTable"  styleClass="btn-danger"/>
+                    <Label fx:id="tableActionLabel" style="-fx-text-fill:#f5a623;-fx-font-size:12;"/>
+                </HBox>
+                <Label fx:id="tableSelectionneeAdminLabel"
+                       text="Cliquez sur une table pour la sélectionner (modification / suppression)"
+                       style="-fx-text-fill:#6b7488;-fx-font-size:12;"/>
+
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                            style="-fx-background-color:transparent;-fx-background:transparent;">
+                    <GridPane fx:id="planSalle" hgap="15" vgap="15" style="-fx-padding:5;"/>
+                </ScrollPane>
+            </VBox>
+
+            <VBox fx:id="paneMenu" spacing="15" style="-fx-padding:20;" visible="false">
+                <Text text="Gestion du Menu" style="-fx-fill:white;-fx-font-size:20;-fx-font-weight:bold;"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <TextField fx:id="nomField"      promptText="Nom du plat"    prefWidth="160"/>
+                    <TextField fx:id="prixField"     promptText="Prix (TND)"     prefWidth="90"/>
+                    <ComboBox  fx:id="categorieBox"  promptText="Categorie"      prefWidth="120"/>
+                    <TextField fx:id="descField"     promptText="Description"    prefWidth="200"/>
+                    <Button text="Ajouter"      onAction="#ajouterArticle"   styleClass="btn-success"/>
+                    <Button text="Modifier"     onAction="#modifierArticle"  styleClass="btn-warning"/>
+                    <Button text="Supprimer"    onAction="#supprimerArticle" styleClass="btn-danger"/>
+                    <Button text="Toggle Dispo" onAction="#toggleDispo"      styleClass="btn-warning"/>
+                </HBox>
+                <TableView fx:id="menuTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNom"       text="Nom"         prefWidth="180"/>
+                        <TableColumn fx:id="colCategorie" text="Categorie"   prefWidth="110"/>
+                        <TableColumn fx:id="colPrix"      text="Prix (TND)"  prefWidth="90"/>
+                        <TableColumn fx:id="colDispo"     text="Disponible"  prefWidth="80"/>
+                        <TableColumn fx:id="colDesc"      text="Description" prefWidth="250"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <VBox fx:id="paneCommandes" spacing="10" style="-fx-padding:20;" visible="false">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Text text="Commandes en Cours" style="-fx-fill:white;-fx-font-size:20;-fx-font-weight:bold;"/>
+                </HBox>
+                <TableView fx:id="commandesTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colCId"      text="N° Commande" prefWidth="100"/>
+                        <TableColumn fx:id="colCTable"   text="Table"   prefWidth="100"/>
+                        <TableColumn fx:id="colCStatut"  text="Statut"  prefWidth="140"/>
+                        <TableColumn fx:id="colCServeur" text="Serveur" prefWidth="150"/>
+                        <TableColumn fx:id="colCHeure"   text="Heure"   prefWidth="130"/>
+                        <TableColumn fx:id="colCTotal"   text="Total"   prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <VBox fx:id="paneAdditions" spacing="15" style="-fx-background-color:#0b0e1a;-fx-padding:25;" visible="false">
+                <Text text="Clôture des Additions" style="-fx-fill:white;-fx-font-size:20;-fx-font-weight:bold;"/>
+
+                <HBox spacing="25" VBox.vgrow="ALWAYS">
+                    <VBox spacing="10" prefWidth="300" minWidth="250">
+                        <Label text="Sélectionnez une table occupée :" style="-fx-text-fill:#98a2b8;-fx-font-size:13;"/>
+                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color:transparent;-fx-background:transparent;">
+                            <GridPane fx:id="grilleTablesAdditions" hgap="15" vgap="15" style="-fx-padding:5;"/>
+                        </ScrollPane>
+                    </VBox>
+
+                    <Separator orientation="VERTICAL" style="-fx-background-color:#232a42;"/>
+
+                    <VBox fx:id="containerFacture" spacing="15" HBox.hgrow="ALWAYS" alignment="TOP_CENTER" style="-fx-padding:10;">
+                        <Label fx:id="labelSelectionTableMessage" text="Aucune table sélectionnée pour le moment." style="-fx-text-fill:#6b7488;-fx-font-size:14;-fx-font-style:italic;" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <VBox fx:id="paneStats" spacing="25" alignment="CENTER" style="-fx-padding:40;" visible="false">
+                <Text text="Tableau de Bord" style="-fx-fill:white;-fx-font-size:22;-fx-font-weight:bold;"/>
+
+                <HBox spacing="25" alignment="CENTER">
+                    <VBox alignment="CENTER" spacing="8" prefWidth="180" prefHeight="110" style="-fx-background-color:#141a2e;-fx-background-radius:12;-fx-padding:20;">
+                        <Text text="CA Aujourd'hui" style="-fx-fill:#98a2b8;-fx-font-size:13;"/>
+                        <Label fx:id="caJourLabel" text="-- TND" style="-fx-text-fill:#22c55e;-fx-font-size:20;-fx-font-weight:bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="8" prefWidth="180" prefHeight="110" style="-fx-background-color:#141a2e;-fx-background-radius:12;-fx-padding:20;">
+                        <Text text="Tables Occupees" style="-fx-fill:#98a2b8;-fx-font-size:13;"/>
+                        <Label fx:id="tablesOcclabel" text="--" style="-fx-text-fill:#e94560;-fx-font-size:20;-fx-font-weight:bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="8" prefWidth="180" prefHeight="110" style="-fx-background-color:#141a2e;-fx-background-radius:12;-fx-padding:20;">
+                        <Text text="Commandes en cours" style="-fx-fill:#98a2b8;-fx-font-size:13;"/>
+                        <Label fx:id="cmdEnCours" text="--" style="-fx-text-fill:#f5a623;-fx-font-size:20;-fx-font-weight:bold;"/>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="25" alignment="CENTER">
+                    <VBox alignment="CENTER" spacing="8" prefWidth="180" prefHeight="110" style="-fx-background-color:#141a2e;-fx-background-radius:12;-fx-padding:20;">
+                        <Text text="CA Mois" style="-fx-fill:#98a2b8;-fx-font-size:13;"/>
+                        <Label fx:id="caMoisLabel" text="-- TND" style="-fx-text-fill:#34d399;-fx-font-size:18;-fx-font-weight:bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="8" prefWidth="180" prefHeight="110" style="-fx-background-color:#141a2e;-fx-background-radius:12;-fx-padding:20;">
+                        <Text text="CA Année" style="-fx-fill:#98a2b8;-fx-font-size:13;"/>
+                        <Label fx:id="caAnneeLabel" text="-- TND" style="-fx-text-fill:#60a5fa;-fx-font-size:18;-fx-font-weight:bold;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="8" prefWidth="180" prefHeight="110" style="-fx-background-color:#141a2e;-fx-background-radius:12;-fx-padding:20;">
+                        <Text text="Best Seller" style="-fx-fill:#98a2b8;-fx-font-size:13;"/>
+                        <Label fx:id="bestSellerLabel" text="--" style="-fx-text-fill:#fbbf24;-fx-font-size:18;-fx-font-weight:bold;"/>
+                        <Label fx:id="bestSellerQteLabel" text="" style="-fx-text-fill:#98a2b8;-fx-font-size:11;"/>
+                    </VBox>
+                </HBox>
+
+            </VBox>
+
+            <!-- Notifications -->
+            <VBox fx:id="paneNotifications" spacing="15" style="-fx-padding:25;" visible="false">
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Text text="Notifications" style="-fx-fill:white;-fx-font-size:20;-fx-font-weight:bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Tout marquer comme lu" onAction="#marquerToutesNotifsLues" styleClass="btn-primary"/>
+                    <Button text="Rafraichir" onAction="#loadNotifications" styleClass="btn-primary"/>
+                </HBox>
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color:transparent;-fx-background:transparent;">
+                    <VBox fx:id="listeNotifications" spacing="10" style="-fx-padding:5;"/>
+                </ScrollPane>
+            </VBox>
+
+            <!-- Utilisateurs -->
+            <VBox fx:id="paneUtilisateurs" spacing="15" style="-fx-padding:25;" visible="false">
+                <Text text="Gestion des Utilisateurs" style="-fx-fill:white;-fx-font-size:20;-fx-font-weight:bold;"/>
+                <Text text="Création des comptes Serveur et Cuisinier" style="-fx-fill:#98a2b8;-fx-font-size:12;"/>
+
+                <HBox spacing="10" alignment="CENTER_LEFT"
+                      style="-fx-background-color:#141a2e;-fx-background-radius:10;-fx-padding:12;">
+                    <TextField fx:id="uNomField" promptText="Nom complet" prefWidth="160"/>
+                    <TextField fx:id="uEmailField" promptText="Email" prefWidth="180"/>
+                    <PasswordField fx:id="uMotDePasseField" promptText="Mot de passe" prefWidth="140"/>
+                    <ComboBox fx:id="uRoleBox" promptText="Rôle" prefWidth="120"/>
+                    <Button text="✚ Créer le compte" onAction="#creerUtilisateur" styleClass="btn-success"/>
+                </HBox>
+                <Label fx:id="utilisateurActionLabel" style="-fx-text-fill:#f5a623;-fx-font-size:12;"/>
+
+                <TableView fx:id="utilisateursTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colUNom" text="Nom" prefWidth="180"/>
+                        <TableColumn fx:id="colUEmail" text="Email" prefWidth="220"/>
+                        <TableColumn fx:id="colURole" text="Rôle" prefWidth="110"/>
+                        <TableColumn fx:id="colUActif" text="Statut" prefWidth="100"/>
+                        <TableColumn fx:id="colUActions" text="Actions" prefWidth="260"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+        </StackPane>
+    </center>
+</BorderPane>

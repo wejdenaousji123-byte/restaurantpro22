@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.restaurantpro.fx.controller.CuisinierDashboardController"
+            style="-fx-background-color:#0b0e1a;">
+
+    <left>
+        <VBox spacing="5" minWidth="180"
+              styleClass="sidebar" style="-fx-background-color:#141a2e;-fx-padding:20;">
+            <Text text="RestaurantPro" style="-fx-fill:white;-fx-font-size:16;-fx-font-weight:bold;"/>
+            <Label fx:id="nomCuisinierLabel" style="-fx-text-fill:#98a2b8;-fx-font-size:11;-fx-padding:0 0 15 0;"/>
+
+            <Button text="Commandes" fx:id="btnCommandesTab" onAction="#showCommandesTab" maxWidth="Infinity" styleClass="sidebar-btn"/>
+
+            <HBox alignment="CENTER_LEFT">
+                <Button text="🔔 Notifications" fx:id="btnNotifications" onAction="#showNotifications" maxWidth="Infinity" styleClass="sidebar-btn" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="badgeNotifCount" text="" visible="false" managed="false"
+                       style="-fx-background-color:#e74c3c;-fx-text-fill:white;-fx-font-size:10;-fx-font-weight:bold;-fx-background-radius:10;-fx-padding:2 7;-fx-translate-x:-10;"/>
+            </HBox>
+
+            <Separator style="-fx-background-color:#232a42;"/>
+            <Button text="Deconnexion" onAction="#logout" maxWidth="Infinity" styleClass="sidebar-btn-danger"/>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="mainStack" style="-fx-background-color:#0b0e1a;">
+
+            <HBox fx:id="paneCommandes" spacing="15" style="-fx-padding:20;">
+
+                <VBox spacing="10" prefWidth="380">
+                    <Text text="Commandes actives" style="-fx-fill:white;-fx-font-size:16;-fx-font-weight:bold;"/>
+                    <Text text="Rouge = En attente  |  Orange = En preparation"
+                          style="-fx-fill:#98a2b8;-fx-font-size:11;"/>
+                    <ListView fx:id="commandesListView" VBox.vgrow="ALWAYS"
+                              style="-fx-background-color:#141a2e;-fx-control-inner-background:#141a2e;"/>
+                </VBox>
+
+                <VBox spacing="15" prefWidth="430">
+                    <Text text="Detail de la commande" style="-fx-fill:white;-fx-font-size:16;-fx-font-weight:bold;"/>
+                    <TextArea fx:id="detailArea" editable="false" prefHeight="320" wrapText="true"
+                              style="-fx-background-color:#141a2e;-fx-text-fill:white;-fx-font-family:monospace;-fx-font-size:13;"/>
+                    <HBox spacing="12">
+                        <Button fx:id="btnEnPreparation" text="Mettre En Preparation"
+                                onAction="#marquerEnPreparation"
+                                styleClass="btn-warning" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                        <Button fx:id="btnPrete" text="Marquer Prete"
+                                onAction="#marquerPrete"
+                                styleClass="btn-success" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    </HBox>
+                    <Text text="Le serveur est notifie automatiquement quand la commande est prete."
+                          style="-fx-fill:#5b6478;-fx-font-size:11;"/>
+                </VBox>
+
+            </HBox>
+
+            <!-- Notifications -->
+            <VBox fx:id="paneNotifications" spacing="15" style="-fx-padding:20;" visible="false">
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Text text="Notifications" style="-fx-fill:white;-fx-font-size:18;-fx-font-weight:bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Tout marquer comme lu" onAction="#marquerToutesNotifsLues" styleClass="btn-primary"/>
+                    <Button text="Rafraichir" onAction="#loadNotifications" styleClass="btn-primary"/>
+                </HBox>
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color:transparent;-fx-background:transparent;">
+                    <VBox fx:id="listeNotifications" spacing="10" style="-fx-padding:5;"/>
+                </ScrollPane>
+            </VBox>
+
+        </StackPane>
+    </center>
+
+    <bottom>
+        <Label fx:id="statusBar" text="Pret"
+               style="-fx-background-color:#223760;-fx-text-fill:#98a2b8;-fx-padding:5 15;"/>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.restaurantpro.fx.controller.LoginController"
+           style="-fx-background-color: linear-gradient(to bottom right, #0b0e1a, #121933 55%, #0b0e1a);">
+
+    <VBox alignment="CENTER" spacing="28" maxWidth="380" maxHeight="-1.0">
+
+        <VBox alignment="CENTER" spacing="4">
+            <Label text="🍽" style="-fx-font-size:34px;"/>
+            <Text text="RestaurantPro"
+                  style="-fx-fill:white; -fx-font-size:32px; -fx-font-weight:bold;"/>
+            <Text text="Système de Gestion de Restaurant"
+                  style="-fx-fill:#98a2b8; -fx-font-size:13px;"/>
+        </VBox>
+
+        <VBox spacing="14" maxWidth="340"
+              style="-fx-background-color:#141a2e;
+                     -fx-background-radius:16;
+                     -fx-border-color:#223760;
+                     -fx-border-radius:16;
+                     -fx-padding:32 28;">
+            <effect>
+                <DropShadow color="rgba(0,0,0,0.5)" radius="24" offsetY="8"/>
+            </effect>
+
+            <Label text="Connexion" style="-fx-text-fill:white;-fx-font-size:16px;-fx-font-weight:bold;"/>
+
+            <VBox spacing="6">
+                <Label text="Email" style="-fx-text-fill:#98a2b8;-fx-font-size:11px;-fx-font-weight:bold;"/>
+                <TextField fx:id="emailField" promptText="votre@email.com"
+                           style="-fx-background-color:#0f1424;-fx-text-fill:white;-fx-prompt-text-fill:#5b6478;-fx-background-radius:9;-fx-border-color:#223760;-fx-border-radius:9;-fx-padding:10;-fx-font-size:14;"/>
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="Mot de passe" style="-fx-text-fill:#98a2b8;-fx-font-size:11px;-fx-font-weight:bold;"/>
+                <PasswordField fx:id="passwordField" promptText="••••••••"
+                               style="-fx-background-color:#0f1424;-fx-text-fill:white;-fx-prompt-text-fill:#5b6478;-fx-background-radius:9;-fx-border-color:#223760;-fx-border-radius:9;-fx-padding:10;-fx-font-size:14;"/>
+            </VBox>
+
+            <Label fx:id="errorLabel" textFill="#ff6b6b" wrapText="true" style="-fx-font-size:12px;"/>
+
+            <Button fx:id="loginBtn" text="Se connecter" onAction="#handleLogin"
+                    maxWidth="Infinity" styleClass="btn-accent"
+                    style="-fx-padding:12;-fx-font-size:14;"/>
+        </VBox>
+
+        <Text text="© RestaurantPro" style="-fx-fill:#3d4560; -fx-font-size:11px;"/>
+    </VBox>
+
+</StackPane>
